@@ -12,9 +12,10 @@
    
 <!-- From Uiverse.io by bociKond --> 
 <form class="form" method="POST">
+  {% csrf_token %}
   <span class="input-span">
-    <label for="email" class="label">Email</label>
-    <input type="email" name="email" id="email"
+    <label for="username" class="label">Username</label>
+    <input type="text" name="username" id="username"
   /></span>
   <span class="input-span">
     <label for="password" class="label">Password</label>
