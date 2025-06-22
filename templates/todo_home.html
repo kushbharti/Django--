@@ -1,11 +1,75 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}
-    Home
-{% endblock  %}
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %} Todo Home {% endblock %} 
+
+{% block extra_css %}
+<link href="{% static 'todo_home.css' %}" rel="stylesheet" />
+{% endblock %} 
 
 {% block content %}
-    <h1> Home Page</h1>
 
-   
-{% endblock  %}
+<br /><br /><br /><br />
+<div class="form-container">
+  <h2>Todo Application</h2>
+  <form  method="POST">
+    {% csrf_token %}
+    <div class="form-groupa">
+      <label for="title">Todo Title</label>
+      <input type="text" id="name" name="title" required />
+    </div>
+
+    <div class="form-group">
+      <label for="feedback">Todo Description</label>
+      <textarea id="feedback" name="desc" required></textarea>
+    </div>
+
+    <input type="submit" value="Add" />
+  </form>
+</div>
+
+
+       <div class="table-container">
+        {% if todos %}
+        <h2>Your Todos List</h2>
+        <table>
+             
+            <thead>
+         
+                <tr>
+                    <th>Sr.no</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            
+            </thead>
+            <tbody>
+           
+                {% for todo in todos %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{todo.todo_title}}</td>
+                    <td>{{todo.todo_desc}}</td>
+                    <td>{{todo.created_date | date:"d M , Y" }}</td>
+                    <td>
+                        <button type="submit" ><a href="{% url 'update_todo' todo.id %}">Edit</a></button>
+                        <button type="submit" ><a href="{% url 'delete_todo' todo.id %}">Delete</a></button>
+                    </td>
+                </tr>
+                {% endfor%}
+            
+            
+
+         
+                
+            </tbody>
+        </table>
+            {% else %}
+
+            <h2>No Todo Found. Add Your 1st Todo !</h2>
+
+           {% endif %}
+    </div>
+{% endblock %}

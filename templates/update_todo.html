@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %} Todo Home {% endblock %} 
+
+{% block extra_css %}
+<link href="{% static 'todo_home.css' %}" rel="stylesheet" />
+{% endblock %} 
+
+{% block content %}
+
+<br /><br />
+<div class="form-container">
+  <h2>Todo Application</h2>
+  <form  method="POST">
+    {% csrf_token %}
+    <div class="form-groupa">
+      <label for="title">Todo Title</label>
+      <input type="text" id="title" name="title" value="{{todo.todo_title}}" />
+    </div>
+
+    <div class="form-group">
+      <label for="desc">Todo Description</label>
+      <textarea id="desc" name="desc" > {{todo.todo_desc}} </textarea>
+    </div>
+
+    <input type="submit" value="Update Todo" />
+  </form>
+</div>
+
+{% endblock %}
