@@ -11,7 +11,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('register/',views.register, name='register'),
     path('logout/',views.logout_view, name='logout'),
-    path('todo/',include('ToDo_app.urls'))
+    path('todo/',include('ToDo_app.urls')),
+    path('weather/',include('WeatherApp.urls')),
 ]
 
 if settings.DEBUG:
