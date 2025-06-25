@@ -35,7 +35,7 @@ def home(request):
             "temp": weather_response['main']['temp'],
             "icon": weather_response['weather'][0]["icon"]
         }
-        print(contexts)
+        
     
     return render(request,'weather_home.html',{"context":contexts})
 
