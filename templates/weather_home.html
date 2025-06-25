@@ -1,0 +1,211 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block title %} Weather Home {% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'weather_home.css' %}" rel="stylesheet" />
+{% endblock %} 
+
+{% block content %}
+<br /><br /><br />
+<div class="weather-container">
+  <!-- Header -->
+  <h1 class="header-title">
+    <svg
+      class="header-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M17.5 19H9a7 7 0 1 1 6.71-9h3.79a4.5 4.5 0 1 1 0 9H17.5Z" />
+    </svg>
+    Weather Forecast
+  </h1>
+
+  <form method="POST">
+    <!-- City Input -->
+    {% csrf_token %}
+    <div class="input-section">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          placeholder="Enter city name..."
+          class="city-input"
+          name="city"
+          aria-label="City Name Input"
+        />
+        <!-- Hardcoded for static display -->
+        <svg
+          class="map-pin-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+          <path d="M12 22v-3.5" />
+          <path d="M12 11.5V2" />
+          <path d="M8 6l4-4 4 4" />
+          <path d="M16 18l-4 4-4-4" />
+        </svg>
+      </div>
+      <button class="search-button" aria-label="Search Weather" type="submit">
+        <svg
+          class="search-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        Search
+      </button>
+    </div>
+  </form>
+
+  {% if context %}
+    
+
+
+  <!-- Weather Display (Hardcoded for static HTML) -->
+  <div class="weather-display">
+    <!-- Location -->
+    <p class="city-name">
+      <svg
+        class="city-pin-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 18.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+        <path d="M12 22v-3.5" />
+        <path d="M12 11.5V2" />
+        <path d="M8 6l4-4 4 4" />
+        <path d="M16 18l-4 4-4-4" />
+      </svg>
+      {{context.city}}
+    </p>
+
+    <!-- Weather Icon and Description -->
+    <div class="weather-icon-wrapper">
+      <svg
+        class="weather-icon-svg"
+        style="color: #60a5fa"
+        xmlns="http://www.w3.org/2000/svg"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h3.79a4.5 4.5 0 1 1 0 9H17.5Z" />
+      </svg>
+      <p class="weather-description">
+
+        {{context.climate}}  ||   {{context.climate_desc}}
+      </p>
+    </div>
+
+    <!-- Temperature -->
+    <p class="temperature">
+      <svg
+        class="temp-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M14 4V2a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v2" />
+        <path d="M8 20a4 4 0 0 0 4-4V5H8Z" />
+        <path d="M12 5v11a4 4 0 0 1-4 4H8" />
+      </svg>
+      {{context.temp}}  <sub> kel.</sub>
+    </p>
+
+    <!-- Additional Details -->
+    <div class="details-grid">
+      <div class="detail-card">
+        <svg
+          class="detail-icon humidity-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M7 16l-3-3 7-7 7 7-3 3" />
+          <path d="M12 3v13" />
+        </svg>
+        <div>
+          <p class="detail-label">Humidity</p>
+          <p class="detail-value">{{context.humidity}}</p>
+        </div>
+      </div>
+      <div class="detail-card">
+        <svg
+          class="detail-icon wind-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M17.65 17.65c-1.63 1.63-3.95 2.5-6.25 2.5-4.5 0-8.15-3.65-8.15-8.15C3.25 7.6 6.9 4 11.4 4c2.3 0 4.6 0.87 6.23 2.5l2.4-2.4"
+          />
+          <path d="M22 2L10 14" />
+        </svg>
+        <div>
+          <p class="detail-label">Wind Speed</p>
+          <p class="detail-value">{{context.wind_speed}}km/h</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+    <h3>Enter the City name</h3>
+  {% endif %}
+
+{% endblock %}
