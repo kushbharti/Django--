@@ -14,8 +14,8 @@ def home(request):
     todos = Todo.objects.all()
     return render(request,'todo_home.html',{'todos':todos})
 
-def update_todo(request,id):
-    todo = Todo.objects.get(id=id)
+def update_todo(request,slug):
+    todo = Todo.objects.get(slug=slug)
     if request.method == 'POST':
         title = request.POST['title']
         desc = request.POST['desc']
@@ -26,8 +26,8 @@ def update_todo(request,id):
         return redirect('todo')
     return render(request,'update_todo.html',{'todo':todo})
 
-def delete_todo(request,id):
-    del_todo = Todo.objects.get(id=id)
+def delete_todo(request,slug):
+    del_todo = Todo.objects.get(slug=slug)
     del_todo.delete()
     return redirect('todo')
 

@@ -54,8 +54,8 @@
                     <td>{{todo.todo_desc}}</td>
                     <td>{{todo.created_date | date:"d M , Y" }}</td>
                     <td>
-                        <button type="submit" ><a href="{% url 'update_todo' todo.id %}">Edit</a></button>
-                        <button type="submit" ><a href="{% url 'delete_todo' todo.id %}">Delete</a></button>
+                        <button type="submit" ><a href="{% url 'update_todo' todo.slug %}">Edit</a></button>
+                        <button type="submit" ><a href="{% url 'delete_todo' todo.slug %}">Delete</a></button>
                     </td>
                 </tr>
                 {% endfor%}
