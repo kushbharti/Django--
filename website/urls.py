@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/',views.logout_view, name='logout'),
     path('todo/',include('ToDo_app.urls')),
     path('weather/',include('WeatherApp.urls')),
+    path('blog/',include('BlogApp.urls')),
 ]
 
 if settings.DEBUG:

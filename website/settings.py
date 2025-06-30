@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'templates',
     'ToDo_app',
     'WeatherApp',
+    'BlogApp',
 ]
 
 MIDDLEWARE = [
