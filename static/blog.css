@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f0f2f5; /* Light grey background */
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Tab button styling */
+.tab-button {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem; /* Rounded corners for tabs */
+}
+
+.tab-button.active {
+  background-color: #ffffff; /* White background for active tab */
+  color: #1a73e8; /* Blue text for active tab */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button:not(.active):hover {
+  background-color: #e2e8f0; /* Lighter grey on hover for inactive */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* Post card styling */
+.post-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 0.75rem; /* More rounded corners for cards */
+}
+
+.post-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+}
+
+/* Button styling */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 100%
+  ); /* Gradient background */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px; /* Pill shape */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px); /* Lift on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background-color: #e2e8f0;
+  color: #4a5568;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  border: 1px solid #cbd5e0;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5e0;
+}
+
+/* Hamburger menu styling */
+.hamburger-menu {
+  display: none; /* Hidden by default on larger screens */
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block; /* Show on small screens */
+  }
+  .nav-links {
+    display: none; /* Hide regular nav links */
+    flex-direction: column;
+    position: absolute;
+    top: 64px; /* Below header */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 1rem;
+    border-bottom: 1px solid #f0f2f5;
+  }
+}
+
+/* Sections and Tabs controlled by CSS (initially All Posts visible) */
+.post-section {
+  display: none; /* Hidden by default */
+}
+#all-posts-section {
+  display: block; /* All posts section visible by default */
+}
+#my-posts-section {
+  display: none; /* My posts section hidden by default */
+}
+/* Active nav link for desktop */
+.nav-links a.all-posts-link {
+  /* All Posts link */
+  color: #1a73e8; /* Active color */
+  font-weight: bold;
+}
+.nav-links a.my-posts-link {
+  /* My Posts link */
+  color: #6a737d; /* Inactive color */
+  font-weight: normal;
+}
+/* Active tab button for mobile */
+#allPostsTabMobile {
+  background-color: #ffffff; /* Active background */
+  color: #1a73e8; /* Active text */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+#myPostsTabMobile {
+  background-color: #f0f2f5; /* Inactive background */
+  color: #718096; /* Inactive text */
+}

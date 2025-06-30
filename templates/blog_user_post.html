@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'blog.css' %}">
+
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-50 rounded-b-lg">
+        <div class="text-2xl font-bold text-gray-800">My Blog Hub</div>
+        <nav class="nav-links flex space-x-6">
+            <!-- All Posts link - clicking will display all posts -->
+            <a href="{% url 'blog_home' %}" class="text-gray-600 hover:text-blue-600 font-medium transition duration-200 ">All Posts</a>
+            <!-- My Posts link - clicking will display my posts (active by default) -->
+            <a href="{% url 'user_posts' %}" class=" text-blue-600 font-medium transition duration-200 active">My Posts</a>
+        </nav>
+        <div class="hamburger-menu md:hidden">
+            <i class="fas fa-bars text-xl text-gray-700"></i>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+
+            <!-- Search Bar -->
+        <div class="mb-8 flex justify-center">
+            <div class="relative w-full max-w-xl">
+                <input type="text" id="searchInput" placeholder="Search posts by title or author..."
+                       class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+
+
+ <section id="all-posts-section" class="post-section mb-12">
+              <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Your Posts</h2>
+            <div id="allPostsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Static All Posts (visible by default) -->
+                <div class="post-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/400x250/667eea/ffffff?text=AI+Future" alt="The Future of AI in Everyday Life" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900">The Future of AI in Everyday Life</h3>
+                        <p class="text-sm text-gray-600 mb-3">By <span class="font-medium">User</span> on May 20, 2025</p>
+                        <p class="text-gray-700 text-base mb-4 flex-grow">A fascinating look at how artificial intelligence is shaping our world, from smart homes to advanced analytics.</p>
+                        <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
+                              <div class="flex space-x-2">
+                                <button class="btn-secondary text-sm flex items-center">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button class="btn-secondary text-sm flex items-center text-red-600 hover:bg-red-100 hover:text-red-800 border-red-300">
+                                    <i class="fas fa-trash-alt mr-1"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+        <!-- "Create New Post" Button -->
+        <button class="btn-primary fixed bottom-6 right-6 flex items-center space-x-2 text-lg">
+            <i class="fas fa-plus"></i>
+            <span>Create New Post</span>
+        </button>
+    </main>
+
+</body>
+</html>
