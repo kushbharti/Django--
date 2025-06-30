@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-{% load static %} 
-
+{% extends 'base.html' %} {% load static %} 
 {% block title %} Todo Home {% endblock %} 
 
 {% block extra_css %}
@@ -12,7 +10,7 @@
 <br /><br /><br /><br />
 <div class="form-container">
   <h2>Todo Application</h2>
-  <form  method="POST">
+  <form method="POST">
     {% csrf_token %}
     <div class="form-groupa">
       <label for="title">Todo Title</label>
@@ -28,48 +26,66 @@
   </form>
 </div>
 
+<div class="table-container">
+  {% if todos %}
+  <h2>Your Todos List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Sr.no</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in page_obj %}
+      <tr>
+        <td>{{forloop.counter|add:page_obj.start_index|add:'-1'}}</td>
+        <td>{{todo.todo_title}}</td>
+        <td>{{todo.todo_desc}}</td>
+        <td>{{todo.created_date | date:"d M , Y" }}</td>
+        <td>
+          <button type="submit">
+            <a href="{% url 'update_todo' todo.slug %}">Edit</a>
+          </button>
+          <button type="submit">
+            <a href="{% url 'delete_todo' todo.slug %}">Delete</a>
+          </button>
+        </td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+  {% else %}
 
-       <div class="table-container">
-        {% if todos %}
-        <h2>Your Todos List</h2>
-        <table>
-             
-            <thead>
-         
-                <tr>
-                    <th>Sr.no</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Time</th>
-                    <th>Actions</th>
-                </tr>
-            
-            </thead>
-            <tbody>
-           
-                {% for todo in todos %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{todo.todo_title}}</td>
-                    <td>{{todo.todo_desc}}</td>
-                    <td>{{todo.created_date | date:"d M , Y" }}</td>
-                    <td>
-                        <button type="submit" ><a href="{% url 'update_todo' todo.slug %}">Edit</a></button>
-                        <button type="submit" ><a href="{% url 'delete_todo' todo.slug %}">Delete</a></button>
-                    </td>
-                </tr>
-                {% endfor%}
-            
-            
+  <h2>No Todo Found. Add Your 1st Todo !</h2>
 
-         
-                
-            </tbody>
-        </table>
-            {% else %}
+  {% endif %}
+  <br /><br />
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+       {% endif %}
 
-            <h2>No Todo Found. Add Your 1st Todo !</h2>
+      {% for i in total_page  %}
+        {% if i == page_obj.number %}
+          <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ i }}</span>
+          </li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+        {% endif %}
+      {% endfor %}
 
-           {% endif %}
-    </div>
+      {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Last</a></li>
+      {% endif %}
+
+    </ul>
+  </nav>
+</div>
 {% endblock %}
